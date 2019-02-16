@@ -1,0 +1,100 @@
+#global-header {
+  @include clearfix;
+  background: $nbn-purple;
+  height: 45px;
+
+  #global-header, ul {
+    @include clearfix;
+  }
+
+  .navbar-nbn-logo {
+    display: inline;
+    font-size: 1.25em;
+    width: 100%;
+    img {
+      height: 28px;
+      margin-top:8.5px;
+      margin-left: 8.5px;
+    }
+  }
+
+  a {
+    color: $white;
+
+      &:hover, &:focus{
+        text-decoration: none;
+        opacity: .8;
+      }
+    }
+
+  #global-branding {
+    float: left;
+  }
+
+  .navbar-right {
+    float: right;
+
+    margin-right: 1em;
+
+    li > a:hover {
+      background: $nbn-purple;
+    }
+    li {
+      float: left;
+    }
+  }
+
+  #nav-micro {
+    float: right;
+
+    .icon.icon-pro-small-bold {
+      font-size: 1em;
+      line-height: 2.29166666666667em;
+      padding: 0 .3125em;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 1px;
+      padding-bottom: 0;
+
+      li{
+        float:left;
+      }
+
+      li > a {
+        background: $nbn-purple;
+        border-left: 1px solid $nbn-black;
+        display: block;
+        font-family: $tablet;
+        font-weight: 700;
+        line-height: 45px;
+        min-width: 2.5em;
+        padding: 0 .9375em;
+        position: relative;
+        text-align: center;
+      }
+    }
+  }
+}
+
+//Light Theme
+.light-theme {
+  #global-header {
+    background: $white;
+    border-bottom: 0;
+  }
+
+  #global-header a, #global-footer a  {
+    color: $nbn-purple;
+  }
+
+  #global-header.icon , nav .icon {
+  color: $nbn-purple;
+  }
+
+  .micro-list>li>a {
+  background: $white;
+  border: 0;
+  }
+}

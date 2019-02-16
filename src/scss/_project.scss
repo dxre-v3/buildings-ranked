@@ -1,0 +1,132 @@
+#story{
+  display: flex;
+}
+#building_list{
+  width: 30vw ;
+  height: 99vh;
+  background-color: #fff;
+
+}
+ul{
+  list-style: none;
+  color: #fff;
+}
+h2{
+  color: $nbn-purple;
+  font-family: $serif;
+  font-size: 2em;
+}
+h4{
+  font-size: 1em;
+  color: #b183e2;
+  font-family: $proxima;
+}
+
+
+
+li{
+  color: $nbn-black;
+  font-size: 1em;
+  font-family: $proxima;
+}
+#building_link{}
+
+.building_name:hover{
+  color:$nbn-purple;
+
+}
+.building_list{
+  display: none;
+}
+
+
+p.summary{
+    color:#3e1867;
+    font-family: $proxima;
+    display: none;
+}
+#map_box{
+  width: 60vw ;
+  height: 99vh;
+  background-color: green;
+} 
+
+#mapid { 
+height: 99vh; 
+width: 60vw;
+}
+
+img{
+  width: 20px;
+  height: 60px;
+}
+#hover_box{
+
+  width:20vw;
+  padding:1vw;
+  background-color: #b183e2;
+  border-radius: .5vw 0vw .5vw .5vw;
+  opacity: .9;
+  float: top;
+}
+
+
+#hover_name{
+  color: $nbn-purple;
+  font-family: $proxima;
+  font-size: 1em;
+}
+
+
+#hover_list{
+  display: none;
+}
+
+
+p#hover_summary{
+    color:#3e1867;
+    font-family: $proxima;
+    display: none;
+}
+
+
+
+
+
+
+.building_box{
+}
+#popup_screen{
+
+  width:90vw;
+  height:60vw;
+  background-color: pink;
+  opacity: .5;
+  display:none;
+}
+#popup_box{
+  width:40vw;
+  height:80vh;
+  background-color: orange;
+  margin: 10vh 25vw 0vw 25vw;
+  opacity: 2;
+  display:none;
+
+}
+.building_summary{}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+.marker:hover{
+ border: solid red 1px; 
+}
