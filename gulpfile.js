@@ -8,7 +8,7 @@ const gutil = require('gulp-util');
 const envFile = require('node-env-file');
 const gulp = require('./gulp')([
   'aws',
-  
+
   'build',
   'dev',
   'data',
@@ -17,7 +17,7 @@ const gulp = require('./gulp')([
   'html',
   'img',
   'img-watch',
-  'spreadsheet',
+  'spreadsheet'
 ]);
 
 /* Add secure keys to environment */
