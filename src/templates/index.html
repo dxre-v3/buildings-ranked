@@ -54,15 +54,7 @@
         <div id = "intro"> 
           <p>Once upon a time there was an introduction. No a lead. No. It was whatever anyone wanted to be. I say it is the story of a map full of buildings an yes you are right. I am mostly stalling for space. </p>
         </div>
-        <!------------------------------------------------------------------------------------->
-        <!------------------------------------------------------------------------------------->
-        <div id = "story" > 
-          <div id = "building_list">
-          <h2> Buildings </h2>
-          <div id = "infoHolder">
-            
-          </div>
-          <!--building[39]
+        <!-------------------------------------------------------------------------------------> <!--building[39]
            
             <h4 class="building_name">building[39]</h4>
               <ul class="building_list">
@@ -74,18 +66,29 @@
               </ul>
             <p class = "summary">Words.Words.Words.</p>
                  -->
+        <!------------------------------------------------------------------------------------->
+      <div id = "all_elements">
+         <div id = "hover_box">
+            <div id = "hover_name">Hover over a building to see it's ranking. Click to learn more.</div>
+            <ul id="hover_list"></ul>
+            <p id= "hover_summary"></p>
+      </div>  
+        <div id = "story" > 
+          <!--Holder for list items-->
+          <div id = "building_holder">
+            <!-- Title of list-->
+            <h2> Buildings </h2>
+            <!-- element to bind list to-->
+            <div id = "infoHolder"></div>
           </div>
-
-    <div id = "map_box">  
-      <div id="mapid"></div>
-      <div id = "hover_box">
-        <div id = "hover_name">Hover over a building to see it's ranking. Click to learn more.</div>
-        <ul id="hover_list"></ul>
-        <p id= "hover_summary"></p>
-      </div>
+          <!-- Map holder  -->
+          <div id = "map_box"> 
+            <!-- Map --> 
+            <div id="mapid"></div>
+          </div>
+        </div>
+       
     </div>
-
-
     <section></section>
 
 
@@ -107,7 +110,7 @@
 </div>
         <!-- Comments -->
       </article>
-    <!-- {% include "partials/_footer.html" %} -->
+ {% include "partials/_footer.html" %}
       <script type="text/javascript">window.tweetText = "{{META.share.twitter.share_tweet}}";</script>
     </body>
 </html>

@@ -78,6 +78,8 @@ NBNmap.on('click', onMapClick);
 var building_name = document.getElementsByClassName("building_name");
 var building_list = document.getElementsByClassName("building_list");
 var summary = document.getElementsByClassName("summary");
+
+var hover_box = document.getElementById("hover_box");
 var hover_name = document.getElementById("hover_name");
 var hover_list = document.getElementById("hover_list");
 var hover_summary = document.getElementById("hover_summary");
@@ -98,6 +100,167 @@ var hover_summary = document.getElementById("hover_summary");
     hover_summary.innerHTML = "";
   }
 */
+
+
+
+
+//Get element that holds the data 
+var infoHolder = document.getElementById('infoHolder');
+//Get the data.json file
+var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+var dataFile = "data/data3.json";
+//Read .Json File
+var request = new XMLHttpRequest();    
+request.open('GET', dataFile);
+request.responseType = 'json';
+request.send();
+
+//when data is pulled, run these funtions:
+request.onload = function() {
+  var bData = request.response;
+  showData(bData);
+}
+//var listBox = document.getElementById('building_list');
+
+
+
+/*function createList(jsonObj) {
+  var bName = document.createElement('h4');
+  bName.textContent = jsonObj['homeTown'];
+  listBox.appendChild(bName);
+  var myPara = document.createElement('p');
+  myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+  header.appendChild(myPara);
+}*/
+var geoArr = [];
+function showData(jsonObj) {
+  // Get Data json info
+  var numberB = jsonObj['Sheet1'];
+
+  // run a for loop for the number of entries 
+
+  for (var i = 0; i < numberB.length; i++) {
+
+    // Create the elements you want to fill 
+    var toAppend = document.createElement('span');
+    var head4 = document.createElement('h4');
+    var rankList = document.createElement('ul');
+    var sumList = document.createElement('span');
+
+    // add classes to necessary elements
+    toAppend.id = Number(numberB[i].Rank);
+    head4.classList.add("building_name");
+    head4.id = "h4"+ numberB[i].Rank;
+    rankList.classList.add("building_list");
+    rankList.id = "ul"+ numberB[i].Rank;
+    sumList.classList.add("summary");
+    sumList.id = "sum"+ numberB[i].Rank;
+    // get data and add to the newly created elements 
+    head4.textContent = numberB[i].Rank + ": " + numberB[i].BuildingName;
+
+    var wordsRank = numberB[i].Breakdown;
+    //console.log(numberB[i]);
+    //console.log(wordsRank.length)
+           
+    for (var j = 0; j < wordsRank.length; j++) {
+      //console.log(wordsRank[j] + " content");
+      var listItem = document.createElement('li');
+      listItem.textContent = wordsRank[j];
+      //console.log(listItem)
+      rankList.appendChild(listItem);
+    }
+// 
+
+    var sumRank = numberB[i].Summary; 
+    
+    if (sumRank !== undefined){
+      console.log(sumRank);
+      for (var k = 0; k < sumRank.length; k++) {
+      var para= document.createElement('p');
+      para.textContent = sumRank[k];
+      sumList.appendChild(para);}
+    }
+if (numberB[i].Location !== undefined) {
+
+    var geoLoc = numberB[i].Location;
+    //var geoLoc2 = numberB[i].Location[1];
+    console.log(geoLoc)
+    //console.log(geoLoc2)
+    };
+//    console.log(geoLoc)
+     var geoMarker = L.marker(geoLoc, {icon: nbnicon}).addTo(NBNmap)
+     geoMarker._icon.classList.add("geoTru");
+     //console.log(numberB[i].Rank);
+     geoMarker._icon.id = numberB[i].Rank;
+     geoMarker.addEventListener("mouseover", hovered);
+     geoMarker.addEventListener("click", clicked);
+     geoMarker.addEventListener("mouseout", left);
+    console.log(typeof(geoMarker));
+
+    sumList.textContent = numberB[i].Summary;
+
+    // add all elements to one holder element
+    toAppend.appendChild(head4);
+    toAppend.appendChild(rankList);
+    toAppend.appendChild(sumList);
+    infoHolder.appendChild(toAppend);
+    geoArr.push(geoMarker);
+
+  }
+}
+
+var id;
+var head;
+var list;
+var sum;
+function pair(e){
+  var spot = event.target;
+  //console.log(spot);
+       id = spot.id;
+  //console.log(id);
+        id = Number(id);
+   // var quickID = geoMarker._icon.id
+  head = document.getElementById("h4"+ id);
+  list = document.getElementById("ul"+ id);
+  sum = document.getElementById("sum"+ id);
+  console.log(head);
+  console.log(list);
+  console.log(sum);
+};
+
+//building_name.on('click', clicked);
+
+
+//console.log(typeof(L.marker);
+function hovered(e){
+  pair();
+  hover_name.innerHTML = head.innerHTML;
+  hover_list.innerHTML = list.innerHTML;
+  hover_list.style.display = "block";
+  hover_box.style.width = "30%";
+  hover_box.style.marginLeft = "70%";
+}
+
+function clicked(e){
+    pair();
+    head.scrollIntoView({
+  behavior: 'smooth',
+  block: 'center'
+});
+  list.style.display = "block";
+  sum.style.display = "block";
+}
+
+function left(e){
+    hover_name.innerHTML = "Hover over a building to see it's ranking. Click to learn more.";
+    hover_list.style.display = "none";
+    hover_summary.style.display = "none";
+    hover_box.style.width = "20%";
+    hover_box.style.marginLeft = "80%";
+
+} 
+///*
+
 function techi(e){
   hover_summary.innerHTML = summary[0].innerHTML;
   hover_summary.style.display = "block";
@@ -113,10 +276,26 @@ function clark(e){
 }
 
  function nullTouch(e){
-     hover_name.innerHTML = "Hover over a building to see its ranking. Click to learn more.";
+     hover_name.innerHTML = "Hover over a building to see its ranking." + numberB;
      hover_list.innerHTML = "";
      hover_summary.innerHTML = "";
  }
+
+ var techLoc = [42.0578, -87.6759]
+var tech = L.marker(techLoc, {icon: nbnicon, myID: "tech"}).addTo(NBNmap);
+
+
+
+
+tech.addEventListener("click", techi)
+
+tech.addEventListener('mouseover', clark)
+
+tech.addEventListener('mouseout', nullTouch)
+//*/
+
+
+
 
 // //function change(e){
 //   //building_title[1].innerHTML = building_title[0].innerHTML;
@@ -130,8 +309,8 @@ function clark(e){
 //  //   alert(this.getLatLng());
 // //}
 
-var tech = L.marker([42.0578, -87.6759], {icon: nbnicon, myID: "tech"}).addTo(NBNmap);
 
+//console.log(techLoc)
 
 
 // let tech = L.marker([42.0578, -87.6759], {icon: nbnicon}).addTo(NBNmap);
@@ -142,11 +321,7 @@ var tech = L.marker([42.0578, -87.6759], {icon: nbnicon, myID: "tech"}).addTo(NB
 
 //};
 //tech.removeEventListener();
-tech.addEventListener("click", techi)
 
-tech.addEventListener('mouseover', clark)
-
-tech.addEventListener('mouseout', nullTouch)
 
 
 
@@ -214,67 +389,3 @@ L.marker([42.0585, -87.6736], {icon: nbnicon}).addTo(NBNmap);//Francis Searle Bu
 
 
 
-//Get element that holds the data 
-var infoHolder = document.getElementById('infoHolder');
-//Get the data.json file
-var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
-var dataFile = "data/data.json";
-//Read .Json File
-var request = new XMLHttpRequest();    
-request.open('GET', dataFile);
-request.responseType = 'json';
-request.send();
-
-//when data is pulled, run these funtions:
-request.onload = function() {
-  var bData = request.response;
-  showData(bData);
-}
-var listBox = document.getElementById('building_list');
-
-
-
-/*function createList(jsonObj) {
-  var bName = document.createElement('h4');
-  bName.textContent = jsonObj['homeTown'];
-  listBox.appendChild(bName);
-  var myPara = document.createElement('p');
-  myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
-  header.appendChild(myPara);
-}*/
-
-function showData(jsonObj) {
-  var heroes = jsonObj['rank'];
-      
-  for (var i = 0; i < heroes.length; i++) {
-    var toAppend = document.createElement('span');
-    var head4 = document.createElement('h4');
-    var rankList = document.createElement('ul');
-    var sumlist = document.createElement('p');
-//    var myPara1 = document.createElement('p');
-  //  var myPara2 = document.createElement('p');
-    //var myPara3 = document.createElement('p');
-    //var myList = document.createElement('ul');
-
-    head4.textContent = heroes[i].rank;
-    var wordsRank = heroes[i].Breakdown;    
-    for (var j = 0; j < wordsRank.length; j++) {
-      var listItem = document.createElement('li');
-      listItem.textContent = wordsRank[j];
-      rankList.appendChild(listItem);
-    }
-    sumlist.textContent = heroes[i].summary;
-/*
-    myArticle.appendChild(myH2);
-    myArticle.appendChild(myPara1);
-    myArticle.appendChild(myPara2);
-    myArticle.appendChild(myPara3);
-    myArticle.appendChild(myList);*/
-
-    toAppend.appendChild(head4);
-    toAppend.appendChild(rankList);
-    toAppend.appendChild(sumlist);
-    infoHolder.appendChild(toAppend);
-
-  }
-}

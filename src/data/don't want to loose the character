@@ -1,0 +1,160 @@
+---
+title: "The End of Writer’s Block"
+slug: "the-end-of-writers-block"
+authors:
+    -
+        name: Elise Lee
+    -
+        name: Yani Xie
+    -
+        name: Sarah Wong
+date: "2019-01-02 09:00:00 -0500"
+project: "Creative Co-Author"
+drive_url: https://docs.google.com/document/d/1wXadM4OgJW7_KZzSw8RfMDUxrOUl6kbhwRYe0AqoaMI/edit
+---
+
+<p class="lead">Whether you’re a New York Times Bestselling Author starting a new novel or a student working on a short story for class, writer’s block is a familiar feeling to everyone. As you begin writing, before you know it, you find yourself staring at a blank screen, searching in vain for inspiration. What if there was a tool that could help a writer not only find new ideas but ensure that those ideas were somehow related to the work that is already on the page?</p>
+
+Our goals for this quarter were to explore ways to break a writer out of their creative block and to create a user experience that facilitates writing flow. With five iteration cycles in the quarter, we wanted to explore ideas that interested us and proved useful to users and, ultimately, develop these ideas into an intuitive interface for further testing and development.
+
+<h2>Prior work</h2>
+
+Our project for Fall 2018 is a continuation of the exploration done with the first round of the Creative Co-Author project from Spring 2018. During Spring 2018, research and implementation from Creative Co-Author’s first team led them to create a generative machine to inspire writers with related images from Flickr, creating a type of mood board or idea space.
+
+{% include image_set src="/assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/640.png" caption="In the Spring 2018 class, the team developed a system which used the writer’s text to find relevant images which might inspire new creative paths to explore." srcset="/assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/1366.png 1366w, /assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/1024.png 1024w, /assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/768.png 768w, /assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/640.png 640w, " webp_srcset="/assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/1366.webp 1366w, /assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/1024.webp 1024w, /assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/768.webp 768w, /assets/results/the-end-of-writers-block/Screen_Shot_2018-06-07_at_4.29.07_PM/640.webp 640w, " %}
+
+<h2>From writing tool to ideation space</h2>
+
+<h3>Where we started</h3>
+
+The initial approach we started with was a text editor, created by Creative Co-Author project lead Scott Bradley, that took a corpus as input and allowed the writer to control the generation of in-line suggestions. This worked by analyzing the similarity of the writer’s text and phrases found in the corpus, using a threshold from the analysis to generate a phrase to insert into the current story. This enabled the user to generate as many suggestions as they needed to inspire new ideas for their draft. In practice, users could press “tab” to generate a phrase when they found themselves stuck, press “enter” to insert the phrase into their story, and edit the phrase as needed.
+
+{% include image_set src="/assets/results/the-end-of-writers-block/pasted_image_0/640.png" caption="The first demo written by Scott Bradley. The user types in the upper box and hits “tab” to prompt a in-line suggestion (in bold) which is also showed in the lower box." align="right" srcset="/assets/results/the-end-of-writers-block/pasted_image_0/1366.png 1366w, /assets/results/the-end-of-writers-block/pasted_image_0/1024.png 1024w, /assets/results/the-end-of-writers-block/pasted_image_0/768.png 768w, /assets/results/the-end-of-writers-block/pasted_image_0/640.png 640w, " webp_srcset="/assets/results/the-end-of-writers-block/pasted_image_0/1366.webp 1366w, /assets/results/the-end-of-writers-block/pasted_image_0/1024.webp 1024w, /assets/results/the-end-of-writers-block/pasted_image_0/768.webp 768w, /assets/results/the-end-of-writers-block/pasted_image_0/640.webp 640w, " %}
+
+While we found it useful to use the Kivy application as a basis for the development of our final interface, one of the areas for improvement that we found was that generation of phrases based on existing corpora might limit the originality or novelty of the produced draft. By taking phrases from the writing of other authors, especially if the phrase was long and distinguishable enough, there ran the risk of the author inadvertently committing plagiarism with no ill intentions.
+
+In addition, another issue was that the writer may be more inclined to use the phrases as they came, since they were inserted in-line. We envisioned writers instead using phrases as inspiration or altering them through a more creative thought process.
+
+After discovering these areas for potential improvement, we wanted to explore solutions that would address by experimenting with ways of assisting the writer to “discover their own ideas.” Although we toyed around with other modes of conveying inspirations that would cater to the creativity of the writer, such as links or music, we decided that we were most interested in producing interesting, thought-provoking phrases while learning more about natural language processing.
+
+<h3>Generating part-of-speech phrases & character-based questions</h3>
+
+During one of our earlier cycles, we wanted to explore how we could generate a large number of new and original phrases as “inspirations.” After learning about and exploring a few different natural language processing possibilities, we decided to build phrases through tagging parts-of-speech and putting nouns, adverbs, adjectives, and verbs together.
+
+However, we were unsure about which part-of-speech combinations to explore deeper. In addition, we struggled with finding a quality databases of adjectives and nouns.
+
+One breakthrough of our exploration process was the discovery of Grenville Kleiser’s  <a href="http://www.gutenberg.org/ebooks/26225">Fifteen Thousand Useful Phrases</a>, a text found in the Project Gutenberg library. It contained a list of, as the title might indicate, fifteen thousand unique and interesting phrases for authors to use in their writing.
+
+It sparked our interest since the purpose of the book matched up incredibly well with the purpose of the product we wanted to create -- providing inspirational phrases could spark new connections in the minds of writers.
+
+{% include image_set src="/assets/results/the-end-of-writers-block/gutenberg_analysis/640.png" caption="Three phrases, in red font, from Kleiser’s Fifteen Thousand Useful Phrases, are excerpted. Below the phrases, in blue font, is a rough part-of-speech breakdown of the above phrase." align="right" srcset="/assets/results/the-end-of-writers-block/gutenberg_analysis/1366.png 1366w, /assets/results/the-end-of-writers-block/gutenberg_analysis/1024.png 1024w, /assets/results/the-end-of-writers-block/gutenberg_analysis/768.png 768w, /assets/results/the-end-of-writers-block/gutenberg_analysis/640.png 640w, " webp_srcset="/assets/results/the-end-of-writers-block/gutenberg_analysis/1366.webp 1366w, /assets/results/the-end-of-writers-block/gutenberg_analysis/1024.webp 1024w, /assets/results/the-end-of-writers-block/gutenberg_analysis/768.webp 768w, /assets/results/the-end-of-writers-block/gutenberg_analysis/640.webp 640w, " %}
+
+The three of us examined the list and picked phrases we found evocative or interesting. From this, we noticed the phrases that consistently contained interesting results were adjective-noun phrases and adjective-adjective noun phrases. The pairing of multiple adjectives and nouns often produced juxtapositions that were rich with interpretation and, therefore, could fuel a writer’s imaginative process.
+
+We wanted to replicate this creation of rich, interesting phrases in a computational way. We created a program that read all the nouns and all of the adjectives from the Kleiser text and stored them in separate sets. Then, the program would generate adjective + noun phrases or adjective + and + adjective + noun phrases by selecting adjectives and nouns from the Kleiser adjective and noun sets.
+
+{% include image_set src="/assets/results/the-end-of-writers-block/sample-adj-nouns/640.png" caption="Examples of adjective-noun phrases that we generated from our program" srcset="/assets/results/the-end-of-writers-block/sample-adj-nouns/1366.png 1366w, /assets/results/the-end-of-writers-block/sample-adj-nouns/1024.png 1024w, /assets/results/the-end-of-writers-block/sample-adj-nouns/768.png 768w, /assets/results/the-end-of-writers-block/sample-adj-nouns/640.png 640w, " webp_srcset="/assets/results/the-end-of-writers-block/sample-adj-nouns/1366.webp 1366w, /assets/results/the-end-of-writers-block/sample-adj-nouns/1024.webp 1024w, /assets/results/the-end-of-writers-block/sample-adj-nouns/768.webp 768w, /assets/results/the-end-of-writers-block/sample-adj-nouns/640.webp 640w, " %}
+
+{% include image_set src="/assets/results/the-end-of-writers-block/sample_adj_adj_nouns/640.png" caption="Examples of adjective-noun phrases that we generated from our program" srcset="/assets/results/the-end-of-writers-block/sample_adj_adj_nouns/1366.png 1366w, /assets/results/the-end-of-writers-block/sample_adj_adj_nouns/1024.png 1024w, /assets/results/the-end-of-writers-block/sample_adj_adj_nouns/768.png 768w, /assets/results/the-end-of-writers-block/sample_adj_adj_nouns/640.png 640w, " webp_srcset="/assets/results/the-end-of-writers-block/sample_adj_adj_nouns/1366.webp 1366w, /assets/results/the-end-of-writers-block/sample_adj_adj_nouns/1024.webp 1024w, /assets/results/the-end-of-writers-block/sample_adj_adj_nouns/768.webp 768w, /assets/results/the-end-of-writers-block/sample_adj_adj_nouns/640.webp 640w, " %}
+
+Another avenue of exploration we pursued during this iteration was generating questions relevant to the writer’s story to convey a sense of understanding between the system and the user. We were inspired by a scenario brought up from one of our earlier discussions: the feeling of being stuck on a piece of writing, having someone else glance at it and asking a question about it, and then being inspired by the question to keep writing.
+
+Like the Kleiser phrases, we wanted to simulate a similar type of question-asking. We built another program that used name-entity recognition to extract character names and place them into a set of pre-built questions stored in our project. For example, if the text that the user was writing contained the names “Philip” and “Jessica,” the program would detect these names and return questions such as “How does Philip want to be seen by Jessica?” or “How does Jessica display affection?”
+
+The initial demo combined both generating questions and adjective-noun pairs using the words from Kleiser’s list, along with a user experience update to display phrases of inspiration peripherally (at the bottom of the screen), rather than inserting them in-line into the text directly. We wanted the phrases to be minimally interruptive to the flow and to implicitly suggest that the phrases were meant to guide, not replace, the user’s own writing.
+
+{% include image_set src="/assets/results/the-end-of-writers-block/kivy-demo-question/640.JPG" caption="Our first demo of the Co-Author project. The user types in the upper box and hits “tab” to prompt a new question or phrase in the lower box." align="right" srcset="/assets/results/the-end-of-writers-block/kivy-demo-question/1366.JPG 1366w, /assets/results/the-end-of-writers-block/kivy-demo-question/1024.JPG 1024w, /assets/results/the-end-of-writers-block/kivy-demo-question/768.JPG 768w, /assets/results/the-end-of-writers-block/kivy-demo-question/640.JPG 640w, " webp_srcset="/assets/results/the-end-of-writers-block/kivy-demo-question/1366.webp 1366w, /assets/results/the-end-of-writers-block/kivy-demo-question/1024.webp 1024w, /assets/results/the-end-of-writers-block/kivy-demo-question/768.webp 768w, /assets/results/the-end-of-writers-block/kivy-demo-question/640.webp 640w, " %}
+
+We conducted user testing with five users by briefly explaining how to control the suggestion behavior and asking the user to use it to help them write a short story. Our findings were the following -
+
+<ol start="1"> <li >The limited range of questions frustrated users.</li><li >Kleiser’s Fifteen Thousand Useful Phrases held overly complex words for the purpose of some users.</li><li >Users may benefit from a non-interruptive interface, where they didn’t need to repeatedly hit tab for new suggestions.</li></ol>
+
+<h3>Character, Location, Object, Situation, Action, Theme (CLOSAT)</h3>
+
+In building off of the idea of both phrases and story relevance, our team decided to try an approach inspired by the author of “Developing Story Ideas” Michael Rabiger’s CLOSAT method.
+
+As defined by Rabiger, CLOSAT is an acronym that describes the six building blocks of a story: Character, Location, Object, Situation, Action, and Theme. We thought that if we could figure out a way to generate suggestions for the writer with these categories and the context of their story in mind, we would find an effective method for inspiring ideas.
+
+One challenge we faced was figuring out how to classify words into these categories. By utilizing WordNet, a lexical database for the English language, we were able to define parameters to find words that fit into five of these categories. The category of “Theme” is more abstract in nature - identifying a theme is not an easy task for a computer to perform - so we chose to leave it out. This allowed us to create a system that could automate the CLOSAT method, building a word-driven idea space of story elements that the writer could use to complete a draft.
+
+<h2>Incorporating user-based modes of context</h2>
+
+As we developed our CLOSAT strategies, it became increasingly clear that we needed to add some form of user-based context to the phrases. Specifically, the generated suggestions needed to be linked to the context of what the user was currently writing.
+
+Initially, our phrases were purposely created to be “flexible” phrases that could fit in any context. We analyzed and chose parts-of-speech such as adjectives and abstract nouns that had more dynamic meanings to generate phrases for the user’s writing that could be more easily incorporated into an existing storyline.
+
+After receiving feedback and discussing how we could iterate on our discoveries, we chose to pursue increased contextualization to improve the relevancy of our results. Simultaneously, we felt as if this would be an exciting exploration into the possibilities of natural language processing that would challenge us for the rest of the duration of the project.
+
+First, to incorporate an immediate sense of context, we decided to use the most recent sentence, taken from the user’s writing. At first, we tinkered around with using synonyms for words from this last sentence to generate phrases; however, the results were not consistent enough to create the quality, nor the quantity, of phrases that we desired.
+
+Instead, we decided to use similarity indexing to determine which pre-categorized noun had the highest calculated similarity with the sentence. Our program would compare a pre-categorized noun with the sentence and return a higher similarity index if the two were more similar. Then, we could build the phrase with the highest similarity indices for more immediately-relevant results.
+
+In addition, to incorporate a broader sense of context, we wanted to allow the user to choose a genre, and then, based on their choice, return genre-specific results. Combining this with the CLOSAT approach and similarity calculations from the user’s last sentence, we hoped to generate rich, interesting, and surprising suggestions that would spark the user’s imagination.
+
+<h2>The implementation</h2>
+
+<h3>Processing & functionality</h3>
+
+In order to generate a CLOSAT experience that is relevant to the writer’s work, the system takes three main sources of input
+
+<ol start="1"> <li >corpora sorted by genre to anchor the suggestions in genre relevance</li><li >the last sentence of current written text within the interface</li><li >an array of words per CLOSAT category from WordNet.</li></ol>Generating CLOSAT for a particular genre:
+
+<ol start="1"> <li >Pre-process and store appropriate words for character, location, object, situation, and action in arrays from WordNet</li></ol><ul><li >Character  store hyponyms* of character, person, personality, professional, profession, emotion (adjective only), and trait (adjective only)</li><li >Location store hyponyms of area, field, geological formation, building, and, mercantile establishment</li><li >Object store hyponyms of artifact, object, food, animal, and vehicle</li><li >Situation store hyponyms of situation, difficulty, ease, skill, emotion, and trait</li><li >Action store hyponyms of action and behavior</li></ul>note: Hyponyms are specific instances of a generic term (hypernym).
+
+{% include image_set src="/assets/results/the-end-of-writers-block/pastedImage0/640.png" caption="" align="right" srcset="/assets/results/the-end-of-writers-block/pastedImage0/1366.png 1366w, /assets/results/the-end-of-writers-block/pastedImage0/1024.png 1024w, /assets/results/the-end-of-writers-block/pastedImage0/768.png 768w, /assets/results/the-end-of-writers-block/pastedImage0/640.png 640w, " webp_srcset="/assets/results/the-end-of-writers-block/pastedImage0/1366.webp 1366w, /assets/results/the-end-of-writers-block/pastedImage0/1024.webp 1024w, /assets/results/the-end-of-writers-block/pastedImage0/768.webp 768w, /assets/results/the-end-of-writers-block/pastedImage0/640.webp 640w, " %}
+
+<ol start="2"> <li >Pre-process and extract the sets of nouns, verbs and adjectives from corpora for each genre from Gutenberg</li><li >Check if these nouns are in one of WordNet CLOSAT categories, if so, tag corresponding labels to them. If not, predict the CLOSAT category for the rest of these nouns using either (a) similarity index threshold or (b) Naive Bayes and tag each noun with the category it satisfies</li><li >Using templates, generate verbs from genre-based verbs, adjectives from genre-based adjectives and nouns from genre-based CLOSAT arrays to build phrases for each category</li></ol><ul><li >Character templates - adj + noun   or   adj + and + adj + noun</li><li >Location template -  noun</li><li >Object template -  adj + noun</li><li >Situation template -  adj + noun</li><li >Action templates -  verb   or   adj + noun</li></ul>Choosing suggestions that feels relevant to the writer’s current context -
+
+<ol start="1"> <li >Extract the last sentence of the writer’s text</li><li >Find a CLOSAT noun that meet the similarity index threshold for the last sentence</li><li >Build phrases based on CLOSAT templates</li><li >Output suggestions for each category</li></ol>
+
+<h3>User experience visualization</h3>
+
+The user experience for our prototype has been designed to facilitate a constant flow of ideas with minimal interruption. The first iteration of our product (see section titled “Generating part-of-speech phrases & character-based questions”) was designed to be clean and simple -  a minimal viable product. It contained the two components that we felt were necessary to demonstrate our concept -  an area where the user could input text and an area where the generated phrases were to be displayed. The mechanism for a user to prompt  a new phrase was for the user to hit the “tab” button - as many times as they wished.
+
+After user testing, we decided to display multiple results at a time, instead of only one result at the bottom of the application. We realized that users would often press tab multiple times during each time that they were stuck. They expressed the urge to look at a greater quantity of phrases, in order to more quickly find the result that was relevant or would give them the spark of inspiration they needed to continue writing.
+
+{% include image_set src="/assets/results/the-end-of-writers-block/creative-coauthor/640.gif" caption="The final user experience for Creative Co-Author built with Kivy." srcset="/assets/results/the-end-of-writers-block/creative-coauthor/1366.gif 1366w, /assets/results/the-end-of-writers-block/creative-coauthor/1024.gif 1024w, /assets/results/the-end-of-writers-block/creative-coauthor/768.gif 768w, /assets/results/the-end-of-writers-block/creative-coauthor/640.gif 640w, " webp_srcset="/assets/results/the-end-of-writers-block/creative-coauthor/1366.webp 1366w, /assets/results/the-end-of-writers-block/creative-coauthor/1024.webp 1024w, /assets/results/the-end-of-writers-block/creative-coauthor/768.webp 768w, /assets/results/the-end-of-writers-block/creative-coauthor/640.webp 640w, " %}
+
+Next, after receiving feedback, we also decided to automate the appearance of the generated phrases. In this new approach, phrases would be able to appear and disappear on the screen every few seconds in an unobtrusive manner. This way, the user would only need to glance over at the generated results whenever they need inspiration.
+
+This would replace our tabbing feature, which users felt to be clunky and distracting from the flow of writing. In addition, we decided to stagger the appearance of these phrases, making them would appear randomly and one-at-a-time, in order to not overwhelm the user with too many phrases at once.
+
+Then, we decided to implement a way for the user to save these generated suggestions. In the prior iteration, where phrases only appeared after hitting “tab,” the user had full control over the appearance and disappearance of phrases. However, with the automated appearance of results, we wanted to make sure users still had some control over the timing of the phrases. We decided to allow the user the ability to click on a suggestion to save it. This last-clicked suggestion would then remain on the screen for future reference in case the user wanted to look back on their saved suggestion.
+
+Finally, we chose to continue using Python for implementing our front-end interface. We were cognizant of the fact that, to quickly connect our user interface to our Python backend code, it would likely be the most efficient to use a GUI (graphical user interface) that was also written in Python.
+
+Although this Python-centric approach had some limitations in the range of what was possible to implement visually, we felt like it was the right choice when considering our tight iterative cycles.
+
+<h3>User interface implementation</h3>
+
+To implement the user experience we envisioned, we used Kivy, an open-source Python framework for creating GUIs. Using the wide range of available Kivy components, from text labels to moving sliders, we started to build the application.
+
+In the past, when we only had one suggestion, we displayed the suggestion at the bottom of the application. However, when we added multiple suggestions to the bottom of the screen, the results took up a large proportion of space and forced the text box to become strangely warped. The frame for inputting text was extended horizontally in a way that was strange for typical text editors.  It became clear that this was a cramped format that made the suggestions too obtrusive for the user.
+
+As a result, we decided to implement a vertical sidebar to the right of the text box that could display the suggestions. The sidebar would also hold genre buttons, which the user could use to select the genre that the generated phrases would be related to. In addition, it would display the last-clicked phrase suggestion for the user.
+
+The auto-refreshing suggestions appeared based on distinct clock cycles based on a Kivy timer feature. In addition, with each auto-refresh, we read in the last sentence that the user inputted and sent it to the backend to be calculated for similarity.
+
+<h2>Future work</h2>
+
+One approach that was explored in our last iteration was by analyzing a word’s Term Frequency and Inverse Document Frequency (tf-idf for short). This technique looks at the “term frequency,” or how often a word appears in a text to determine which phrases are more indicative of the text. However, since some of these words may simply be more common words in the English language. (In our back-end, we handled a similar issue by adding extremely common words to a “stop list,” and removing these words from the suggestions).
+
+To resolve this issue, a term’s “inverse document frequency” is also considered. The weight of more uncommon or unusual words is decremented, and the weight of more frequent words in the English language is incremented. The combination of these two techniques comprises the word’s tf-idf.
+
+When using tf-idf to process our genre texts in an attempt to find the words that were most representative of each genre, the processing time for each run of the program took hours despite our best efforts to decrease the time complexity. The final version of this tf-idf program would have been a pre-processing step that would only occur once, when loading the program for the very first time on a new computer. However, as we were in the process of tweaking tf-idf program, an obstacle within our current cycle was completing the hours-long wait time after each small change of the program. With a more powerful computer or more weeks to continue this iteration, we would have liked to keep pursuing this path of inquiry.
+
+Another factor that may have skewed the relevancy of our generated phrases was that we were using free Gutenberg texts as the basis for our genres. Gutenberg was extremely helpful in that it was free, accessible, and had a large number of texts in each of our desired genres. However, since Gutenberg only consists of texts in the public domain that are old enough to have expired copyrights, this may have caused an overrepresentation in more archaic, or less-used, words. In the future, we could brainstorm ways to find more recent texts while still staying within the public domain.
+
+<h2>References</h2>
+
+<h3>Inspirational References</h3>
+
+<ul><li ><a href="https://www.amazon.com/Developing-Story-Second-Michael-Rabiger/dp/0240807367">Michael Rabiger’s Developing Story Ideas</a> - Book centered on creative writing and processes for inspiration</li></ul>
+
+<h3>Technical Resources Used</h3>
+
+<ul><li ><a href="https://kivy.org">Kivy</a> - Python library for creating user interfaces</li><li ><a href="https://textblob.readthedocs.io/en/dev/">TextBlob</a> - Python library for text processing and NLP (Natural Language Processing)</li><li ><a href="https://spacy.io">SpaCy</a> - Python library for NLP, extremely fast and powerful for processing</li><li ><a href="http://www.nltk.org">NLTK (Natural Language Toolkit)</a> - Python library for NLP, very extensive</li><li ><a href="https://wordnet.princeton.edu">WordNet</a> - English lexical database, grouped into parts of speech and synsets (semantically-similar words)</li></ul>
+
+<h3>Other External Resources</h3>
+
+<ul><li ><a href="https://www.gutenberg.org">Project Gutenberg</a> - Free online library of books in the public domain</li></ul>
