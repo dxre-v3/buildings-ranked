@@ -75,14 +75,14 @@ NBNmap.on('click', onMapClick);
 
 //important elements
 
-var building_name = document.getElementsByClassName("building_name");
-var building_list = document.getElementsByClassName("building_list");
-var summary = document.getElementsByClassName("summary");
+var y =12; 
 
 var hover_box = document.getElementById("hover_box");
 var hover_name = document.getElementById("hover_name");
 var hover_list = document.getElementById("hover_list");
 var hover_summary = document.getElementById("hover_summary");
+
+
 
 
 /*function techi(e){
@@ -151,6 +151,8 @@ function showData(jsonObj) {
     toAppend.id = Number(numberB[i].Rank);
     head4.classList.add("building_name");
     head4.id = "h4"+ numberB[i].Rank;
+
+
     rankList.classList.add("building_list");
     rankList.id = "ul"+ numberB[i].Rank;
     sumList.classList.add("summary");
@@ -180,6 +182,8 @@ function showData(jsonObj) {
       para.textContent = sumRank[k];
       sumList.appendChild(para);}
     }
+
+
 if (numberB[i].Location !== undefined) {
 
     var geoLoc = numberB[i].Location;
@@ -259,7 +263,33 @@ function left(e){
     hover_box.style.marginLeft = "80%";
 
 } 
-///*
+
+
+var building_name = document.getElementsByClassName("building_name");
+var building_list = document.getElementsByClassName("building_list");
+var summary = document.getElementsByClassName("summary");
+console.log(building_name);
+console.log(building_list);
+console.log(summary);
+console.log(building_name.length)
+
+for (var f = 0; f < building_name.length; f++) {
+   /// Array.from(building_name).forEach(function(element) {
+    //building_name.addEventListener("mouseover", console.log("this is working!"));
+    //building_name.addEventListener("click", console.log("this part is working too!"));
+    ///building_name.addEventListener("mouseout", console.log("this is also working!"));
+//});
+console.log("please work");
+}
+
+
+
+
+
+
+
+
+/*
 
 function techi(e){
   hover_summary.innerHTML = summary[0].innerHTML;
@@ -292,7 +322,7 @@ tech.addEventListener("click", techi)
 tech.addEventListener('mouseover', clark)
 
 tech.addEventListener('mouseout', nullTouch)
-//*/
+*/
 
 
 
