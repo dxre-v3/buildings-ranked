@@ -15,67 +15,36 @@ window.$('.bt-icon--twitter').click((e) => {
 });
 //Map Build_________________________________________________________________________________
 var mapOptions = {
-            center: [42.055756, -87.672694],
-            zoomSnap: 0.20,
-            zoom: 15.80,
-            wheelPxPerZoomLevel: 150,
-            zoomDelta: 0.25,
-            zoomControl: true
-         }
+  center: [42.055756, -87.672694],
+  zoomSnap: 0.20,
+  zoom: 15.80,
+  wheelPxPerZoomLevel: 150,
+  zoomDelta: 0.25,
+  zoomControl: true
+}
 // create new map layer
 var NBNmap = new L.map('mapid', mapOptions);
 // load tiles
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 16,
-    minZoom:15,
-    id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoiZHhyZSIsImEiOiJjanI1anV3M3EwZmowNDVvMjU1NnZrNnR5In0.ELl0VmskdZJajJ2kGd0K6g'
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  maxZoom: 16,
+  minZoom: 15,
+  id: 'mapbox.streets',
+  accessToken: 'pk.eyJ1IjoiZHhyZSIsImEiOiJjanI1anV3M3EwZmowNDVvMjU1NnZrNnR5In0.ELl0VmskdZJajJ2kGd0K6g'
 }).addTo(NBNmap);
 // set custom icon image
 var nbnicon = L.icon({
-    iconUrl: '/images/purpleline.png',
-    //shadowUrl: '/images/shadow.png',
+  iconUrl: '/images/purpleline.png',
+  //shadowUrl: '/images/shadow.png',
 
-    iconSize:     [20, 20], // size of the icon
-    shadowSize:   [30, 30], // size of the shadow
-    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
-    shadowAnchor: [14.5, 15],  // the same for the shadow
-    popupAnchor:  [0, -32] // point from which the popup should open relative to the iconAnchor
+  iconSize: [20, 20], // size of the icon
+  shadowSize: [30, 30], // size of the shadow
+  iconAnchor: [10, 10], // point of the icon which will correspond to marker's location
+  shadowAnchor: [14.5, 15], // the same for the shadow
+  popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
 });
 
-
-/*
-var popup = L.popup();
-
-var hover_box = document.getElementById("hover_box");
-
-var name = 1;
-var position = 1;
-if (position==1){
-building_title[1].innerHTML = building_title[0].innerHTML;
-};
-*/
-
-//use to get exact location of buildings
-/*
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(NBNmap);
-}
-
-NBNmap.on('click', onMapClick);
-*/
-
-
-
-
-
-//important elements
-
-var y =12; 
+var y = 12;
 
 var hover_box = document.getElementById("hover_box");
 var hover_name = document.getElementById("hover_name");
@@ -83,34 +52,13 @@ var hover_list = document.getElementById("hover_list");
 var hover_summary = document.getElementById("hover_summary");
 
 
-
-
-/*function techi(e){
-  if(e.type = "click"){
-    hover_summary.innerHTML = summary[0].innerHTML;
-
-  }else if (e.type= "mouseover"){
-        hover_name.innerHTML = building_name[0].innerHTML;
-    hover_list.innerHTML = building_list[0].innerHTML;
-    hover_summary.innerHTML = summary[0].innerHTML;
-    hover_summary.style.display = "none";
-  }else {
-        hover_name.innerHTML = "Hover over a building to see it's ranking. Click to learn more.";
-    hover_list.innerHTML = "";
-    hover_summary.innerHTML = "";
-  }
-*/
-
-
-
-
-//Get element that holds the data 
+//Get element that holds the data
 var infoHolder = document.getElementById('infoHolder');
 //Get the data.json file
 var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
 var dataFile = "data/data3.json";
 //Read .Json File
-var request = new XMLHttpRequest();    
+var request = new XMLHttpRequest();
 request.open('GET', dataFile);
 request.responseType = 'json';
 request.send();
@@ -120,28 +68,22 @@ request.onload = function() {
   var bData = request.response;
   showData(bData);
 }
-//var listBox = document.getElementById('building_list');
 
+function check() {
+  console.log("does the forloop work")
+}
 
-
-/*function createList(jsonObj) {
-  var bName = document.createElement('h4');
-  bName.textContent = jsonObj['homeTown'];
-  listBox.appendChild(bName);
-  var myPara = document.createElement('p');
-  myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
-  header.appendChild(myPara);
-}*/
 var geoArr = [];
+
 function showData(jsonObj) {
   // Get Data json info
   var numberB = jsonObj['Sheet1'];
 
-  // run a for loop for the number of entries 
+  // run a for loop for the number of entries
 
   for (var i = 0; i < numberB.length; i++) {
 
-    // Create the elements you want to fill 
+    // Create the elements you want to fill
     var toAppend = document.createElement('span');
     var head4 = document.createElement('h4');
     var rankList = document.createElement('ul');
@@ -149,21 +91,22 @@ function showData(jsonObj) {
 
     // add classes to necessary elements
     toAppend.id = Number(numberB[i].Rank);
+    toAppend.addEventListener('click', clickedBuildingName)
     head4.classList.add("building_name");
-    head4.id = "h4"+ numberB[i].Rank;
+    head4.id = "h4" + numberB[i].Rank;
 
 
     rankList.classList.add("building_list");
-    rankList.id = "ul"+ numberB[i].Rank;
+    rankList.id = "ul" + numberB[i].Rank;
     sumList.classList.add("summary");
-    sumList.id = "sum"+ numberB[i].Rank;
-    // get data and add to the newly created elements 
+    sumList.id = "sum" + numberB[i].Rank;
+    // get data and add to the newly created elements
     head4.textContent = numberB[i].Rank + ": " + numberB[i].BuildingName;
 
     var wordsRank = numberB[i].Breakdown;
     //console.log(numberB[i]);
     //console.log(wordsRank.length)
-           
+
     for (var j = 0; j < wordsRank.length; j++) {
       //console.log(wordsRank[j] + " content");
       var listItem = document.createElement('li');
@@ -171,34 +114,34 @@ function showData(jsonObj) {
       //console.log(listItem)
       rankList.appendChild(listItem);
     }
-// 
+    //
 
-    var sumRank = numberB[i].Summary; 
-    
-    if (sumRank !== undefined){
+    var sumRank = numberB[i].Summary;
+
+    if (sumRank !== undefined) {
       console.log(sumRank);
       for (var k = 0; k < sumRank.length; k++) {
-      var para= document.createElement('p');
-      para.textContent = sumRank[k];
-      sumList.appendChild(para);}
+        var para = document.createElement('p');
+        para.textContent = sumRank[k];
+        sumList.appendChild(para);
+      }
     }
 
 
-if (numberB[i].Location !== undefined) {
+    if (numberB[i].Location !== undefined) {
 
-    var geoLoc = numberB[i].Location;
-    //var geoLoc2 = numberB[i].Location[1];
-    console.log(geoLoc)
-    //console.log(geoLoc2)
+      var geoLoc = numberB[i].Location;
+      console.log(geoLoc)
     };
-//    console.log(geoLoc)
-     var geoMarker = L.marker(geoLoc, {icon: nbnicon}).addTo(NBNmap)
-     geoMarker._icon.classList.add("geoTru");
-     //console.log(numberB[i].Rank);
-     geoMarker._icon.id = numberB[i].Rank;
-     geoMarker.addEventListener("mouseover", hovered);
-     geoMarker.addEventListener("click", clicked);
-     geoMarker.addEventListener("mouseout", left);
+    var geoMarker = L.marker(geoLoc, {
+      icon: nbnicon
+    }).addTo(NBNmap)
+    geoMarker._icon.classList.add("geoTru");
+    //console.log(numberB[i].Rank);
+    geoMarker._icon.id = numberB[i].Rank;
+    geoMarker.addEventListener("mouseover", hovered);
+    geoMarker.addEventListener("click", clicked);
+    geoMarker.addEventListener("mouseout", left);
     console.log(typeof(geoMarker));
 
     sumList.textContent = numberB[i].Summary;
@@ -209,7 +152,6 @@ if (numberB[i].Location !== undefined) {
     toAppend.appendChild(sumList);
     infoHolder.appendChild(toAppend);
     geoArr.push(geoMarker);
-
   }
 }
 
@@ -217,26 +159,17 @@ var id;
 var head;
 var list;
 var sum;
-function pair(e){
+
+function pair(e) {
   var spot = event.target;
-  //console.log(spot);
-       id = spot.id;
-  //console.log(id);
-        id = Number(id);
-   // var quickID = geoMarker._icon.id
-  head = document.getElementById("h4"+ id);
-  list = document.getElementById("ul"+ id);
-  sum = document.getElementById("sum"+ id);
-  console.log(head);
-  console.log(list);
-  console.log(sum);
+  id = spot.id;
+  id = Number(id);
+  head = document.getElementById("h4" + id);
+  list = document.getElementById("ul" + id);
+  sum = document.getElementById("sum" + id);
 };
 
-//building_name.on('click', clicked);
-
-
-//console.log(typeof(L.marker);
-function hovered(e){
+function hovered(e) {
   pair();
   hover_name.innerHTML = head.innerHTML;
   hover_list.innerHTML = list.innerHTML;
@@ -245,177 +178,55 @@ function hovered(e){
   hover_box.style.marginLeft = "70%";
 }
 
-function clicked(e){
-    pair();
-    head.scrollIntoView({
-  behavior: 'smooth',
-  block: 'center'
-});
+// whenever a geomarker is clicked on the map, get all
+// building description lists and close each one of them
+// before opening the list corresponding to the clicked
+// geomarker
+function close() {
+  const allBuildingLists = document.getElementsByClassName('building_list');
+  const allSummaries = document.getElementsByClassName('summary');
+  for (let i = 0; i < allBuildingLists.length; i++) {
+    allBuildingLists[i].style.display = "none";
+    allSummaries[i].style.display = "none";
+  }
+}
+
+function clicked(e) {
+  close();
+  pair();
+  head.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center'
+  });
   list.style.display = "block";
   sum.style.display = "block";
 }
 
-function left(e){
-    hover_name.innerHTML = "Hover over a building to see it's ranking. Click to learn more.";
-    hover_list.style.display = "none";
-    hover_summary.style.display = "none";
-    hover_box.style.width = "20%";
-    hover_box.style.marginLeft = "80%";
+function clickedBuildingName(e) {
+  close();
+  var spot = event.target;
+  id = spot.id.slice(2);
+  id = Number(id);
+  var list2 = document.getElementById("ul" + id);
+  var sum2 = document.getElementById("sum" + id);
+  console.log('ev target', e)
+  list2.style.display = "block";
+  sum2.style.display = "block";
+}
 
-} 
+function left(e) {
+  hover_name.innerHTML = "Hover over a building to see it's ranking. Click to learn more.";
+  hover_list.style.display = "none";
+  hover_summary.style.display = "none";
+  hover_box.style.width = "20%";
+  hover_box.style.marginLeft = "80%";
 
+}
+
+function hey() {
+  console.log('hey, working')
+}
 
 var building_name = document.getElementsByClassName("building_name");
 var building_list = document.getElementsByClassName("building_list");
 var summary = document.getElementsByClassName("summary");
-console.log(building_name);
-console.log(building_list);
-console.log(summary);
-console.log(building_name.length)
-
-for (var f = 0; f < building_name.length; f++) {
-   /// Array.from(building_name).forEach(function(element) {
-    //building_name.addEventListener("mouseover", console.log("this is working!"));
-    //building_name.addEventListener("click", console.log("this part is working too!"));
-    ///building_name.addEventListener("mouseout", console.log("this is also working!"));
-//});
-console.log("please work");
-}
-
-
-
-
-
-
-
-
-/*
-
-function techi(e){
-  hover_summary.innerHTML = summary[0].innerHTML;
-  hover_summary.style.display = "block";
-  }
-
-
-function clark(e){
-     hover_name.innerHTML = building_name[0].innerHTML;
-     hover_list.innerHTML = building_list[0].innerHTML;
-     hover_list.style.display = "block";
-     hover_summary.innerHTML = summary[0].innerHTML;
-     hover_summary.style.display = "none";
-}
-
- function nullTouch(e){
-     hover_name.innerHTML = "Hover over a building to see its ranking." + numberB;
-     hover_list.innerHTML = "";
-     hover_summary.innerHTML = "";
- }
-
- var techLoc = [42.0578, -87.6759]
-var tech = L.marker(techLoc, {icon: nbnicon, myID: "tech"}).addTo(NBNmap);
-
-
-
-
-tech.addEventListener("click", techi)
-
-tech.addEventListener('mouseover', clark)
-
-tech.addEventListener('mouseout', nullTouch)
-*/
-
-
-
-
-// //function change(e){
-//   //building_title[1].innerHTML = building_title[0].innerHTML;
-// //}
-
-// //function null_thing(e){
-//   //building_title[1].innerHTML = "building_title[0].innerHTML";
-// //}
-
-// //function onClick(e) {
-//  //   alert(this.getLatLng());
-// //}
-
-
-//console.log(techLoc)
-
-
-// let tech = L.marker([42.0578, -87.6759], {icon: nbnicon}).addTo(NBNmap);
-
-//tech.addEventListener("mouseover", clark);
-//tech.on('mouseover', clark);
-//if (myID == "tech"){
-
-//};
-//tech.removeEventListener();
-
-
-
-
-
-/*function eventHandler(event) {
-  if (event.type == 'mouseover') {
-    hover_name.innerHTML = building_name[0].innerHTML;
-    hover_list.innerHTML = building_list[0].innerHTML;
-    hover_summary.innerHTML = summary[0].innerHTML;
-    hover_summary.style.display = "none";
-  } else if (event.type == 'click'){
-        hover_summary.innerHTML = summary[0].innerHTML;
-      } else {
-        hover_name.innerHTML = "Hover over a building to see it's ranking. Click to learn more.";
-        hover_list.innerHTML = "";
-         hover_summary.innerHTML = "";
-    /* handle a full screen toggle error */
- // }
-//}*/
-/*
-var clark  = L.marker([42.0495, -87.6774], {icon: nbnicon}).addTo(NBNmap); //555 Clark street
-var parkes = L.marker([42.0501, -87.6772], {icon: nbnicon}).addTo(NBNmap);//Parkes Hall 
-var scott = L.marker([42.0515, -87.6776], {icon: nbnicon}).addTo(NBNmap);//Scott Hall 
-var lutkin = L.marker([42.0510, -87.6803], {icon: nbnicon}).addTo(NBNmap);//Lutkin Memorial Hall 
-var fisk = L.marker([42.0507, -87.6742], {icon: nbnicon}).addTo(NBNmap);//Fisk Hall 
-var locy = L.marker([], {icon: nbnicon}).addTo(NBNmap);//Locy Hall 
-var mccormick = L.marker([42.0513, -87.6743], {icon: nbnicon}).addTo(NBNmap);//McCormick Foundation Center 
-var harris = L.marker([42.0513, -87.6763], {icon: nbnicon}).addTo(NBNmap);//Harris Hall 
-var university = L.marker([42.0519, -87.6760], {icon: nbnicon}).addTo(NBNmap);//University Hall 
-var kresgie = L.marker([42.0517, -87.6751], {icon: nbnicon}).addTo(NBNmap);//Kresge/Crowe Hall 
-var swift = L.marker([42.0523, -87.6750], {icon: nbnicon}).addTo(NBNmap);//Annie May Swift Hall 
-L.marker([42.0520, -87.6729], {icon: nbnicon}).addTo(NBNmap);//John J Louis Hall 
-L.marker([42.0521, -87.6731], {icon: nbnicon}).addTo(NBNmap);//Wirtz Center for the Performing Arts 
-L.marker([42.0517, -87.6729], {icon: nbnicon}).addTo(NBNmap);//Marjorie Ward Marshall Dance Center 
-L.marker([42.0524, -87.6727], {icon: nbnicon}).addTo(NBNmap);//Block Museum of Art 
-L.marker([42.0517, -87.6715], {icon: nbnicon}).addTo(NBNmap);//Ryan Center for the Musical Arts (SS Bienen) 
-L.marker([42.0524, -87.6715], {icon: nbnicon}).addTo(NBNmap);//Regenstein Hall of Music 
-L.marker([42.0527, -87.6722], {icon: nbnicon}).addTo(NBNmap);//Pick-Staiger Concert Hall 
-L.marker([42.0534, -87.6727], {icon: nbnicon}).addTo(NBNmap);//Norris University Center 
-L.marker([42.0531, -87.6748], {icon: nbnicon}).addTo(NBNmap);//Main Library 
-L.marker([42.0532, -87.6756], {icon: nbnicon}).addTo(NBNmap);//Deering Library 
-L.marker([], {icon: nbnicon}).addTo(NBNmap);//Donald P Jacobs Center & Andersen Hall (Old Kellogg) 42.0538, -87.6766
-L.marker([42.0548, -87.6763], {icon: nbnicon}).addTo(NBNmap);//Lunt Hall 
-L.marker([42.0548, -87.6760], {icon: nbnicon}).addTo(NBNmap);//Shanley Hall 
-L.marker([42.0560, -87.6756], {icon: nbnicon}).addTo(NBNmap);//Garrett Theological Seminary 
-L.marker([42.0547, -87.6749], {icon: nbnicon}).addTo(NBNmap);//Cresap Laboratory 
-L.marker([], {icon: nbnicon}).addTo(NBNmap);//Swift Hall 
-L.marker([42.0561, -87.6745], {icon: nbnicon}).addTo(NBNmap);//Annenberg Hall 
-L.marker([42.0564, -87.6732], {icon: nbnicon}).addTo(NBNmap);//James L Allen Center 
-L.marker([42.0564, -87.6741], {icon: nbnicon}).addTo(NBNmap);//Silverman Hall 
-L.marker([42.0572, -87.6736], {icon: nbnicon}).addTo(NBNmap);//Pancoe-NSUHS Life Sciences Pavilion 
-L.marker([42.0568, -87.6745], {icon: nbnicon}).addTo(NBNmap);//Ryan Hall 
-L.marker([42.0567, -87.6751], {icon: nbnicon}).addTo(NBNmap);//Dearborn Observatory 
-L.marker([42.0495, -87.6774], {icon: nbnicon}).addTo(NBNmap);//Ford Motor Company Engineering Design Center 
-L.marker([42.0569, -87.6765], {icon: nbnicon}).addTo(NBNmap);//OT Hogan Biological Sciences Building 
-L.marker([42.0574, -87.6741], {icon: nbnicon}).addTo(NBNmap);//Cook Hall 
-//L.marker([], {icon: nbnicon}).addTo(NBNmap);//Technological Institute (Tech) 
-L.marker([42.0581, -87.6744], {icon: nbnicon}).addTo(NBNmap);//Mudd Library 
-L.marker([42.0574, -87.6723], {icon: nbnicon}).addTo(NBNmap);//Kellogg Global Hub (New Kellogg) 
-L.marker([42.0585, -87.6736], {icon: nbnicon}).addTo(NBNmap);//Francis Searle Building 
-
-
-*/
-
-
-
-
