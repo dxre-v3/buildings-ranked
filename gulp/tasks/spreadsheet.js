@@ -31,10 +31,14 @@ module.exports = (cb) => {
   }
 
   const filename = execSync(`gdrive export ${process.env.SHEETID} --mime application/vnd.openxmlformats-officedocument.spreadsheetml.sheet | awk -F\\' '{print $2}'`);
+
+  fs.ensureFile(path.resolve(process.cwd(), 'src/data/data.xlsx'))
+  fs.ensureFile(path.resolve(process.cwd(), 'src/data/data.json'));
+  
   const xlsxPath = path.resolve(process.cwd(), 'src/data/data.xlsx');
   const jsonPath = path.resolve(process.cwd(), 'src/data/data.json');
 
-  execSync(`mv ${bashEscape(filename.toString()).trim()} ${xlsxPath}`);
+  // execSync(`mv ${bashEscape(filename.toString()).trim()} ${xlsxPath}`);
   const data = copytext.process(xlsxPath, {
     processor: 'table',
   });
