@@ -187,6 +187,7 @@ function close() {
     allBuildingLists[i].style.display = "none";
     allSummaries[i].style.display = "none";
   }
+
 }
 
 function clicked(e) {
@@ -198,29 +199,36 @@ function clicked(e) {
   });
   list.style.display = "block";
   sum.style.display = "block";
+  head.style.color = "#501f84";
+  
 }
 
 
 
-
-var holdID;
+var colorHolder;
+var open;
 
 function clickedBuildingName(e) {
   close();
   var spot = event.target;
   id = spot.id.slice(2);
   id = Number(id);
- if (holdID === id){
+  var head2 = document.getElementById("h4" + id);
+  if (open === true){
   close();
-  holdID = 0; 
-
+  colorHolder = null;
+  head2.style.color = colorHolder;
+  open = false; 
+  //head2.style.color = "#b183e2";
  }else{
   var list2 = document.getElementById("ul" + id);
   var sum2 = document.getElementById("sum" + id);
   console.log('ev target', e)
   list2.style.display = "block";
   sum2.style.display = "block";
-  holdID = id; 
+  colorHolder = "#501f84";
+  head2.style.color = colorHolder;
+  open = true; 
 }
 
 }
