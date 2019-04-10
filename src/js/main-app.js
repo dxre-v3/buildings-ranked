@@ -56,7 +56,8 @@ var hover_summary = document.getElementById("hover_summary");
 var infoHolder = document.getElementById('infoHolder');
 //Get the data.json file
 var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
-var dataFile = "data/data3.json";
+//var dataFile = "data/data3.json";
+var dataFile = "data/data.json";
 //Read .Json File
 var request = new XMLHttpRequest();
 request.open('GET', dataFile);
@@ -117,16 +118,15 @@ function showData(jsonObj) {
     //
 
     var sumRank = numberB[i].Summary;
-
-    if (sumRank !== undefined) {
-      console.log(sumRank);
-      for (var k = 0; k < sumRank.length; k++) {
-        var para = document.createElement('p');
-        para.textContent = sumRank[k];
-        sumList.appendChild(para);
-      }
+            console.log(sumRank)
+    for (var k = 0; k < sumRank.length; k++) {
+        var sumItem = document.createElement('p');
+        sumItem.textContent = sumRank[k];
+        console.log(k)
+        console.log(sumItem)
+        sumList.appendChild(sumItem);
+                console.log(sumList)
     }
-
 
     if (numberB[i].Location !== undefined) {
 
@@ -143,8 +143,6 @@ function showData(jsonObj) {
     geoMarker.addEventListener("click", clicked);
     geoMarker.addEventListener("mouseout", left);
     console.log(typeof(geoMarker));
-
-    sumList.textContent = numberB[i].Summary;
 
     // add all elements to one holder element
     toAppend.appendChild(head4);
@@ -202,17 +200,31 @@ function clicked(e) {
   sum.style.display = "block";
 }
 
+
+
+
+var holdID;
+
 function clickedBuildingName(e) {
   close();
   var spot = event.target;
   id = spot.id.slice(2);
   id = Number(id);
+ if (holdID === id){
+  close();
+  holdID = 0; 
+
+ }else{
   var list2 = document.getElementById("ul" + id);
   var sum2 = document.getElementById("sum" + id);
   console.log('ev target', e)
   list2.style.display = "block";
   sum2.style.display = "block";
+  holdID = id; 
 }
+
+}
+
 
 function left(e) {
   hover_name.innerHTML = "Hover over a building to see it's ranking. Click to learn more.";
