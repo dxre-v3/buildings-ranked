@@ -299,7 +299,7 @@
   ]},
   {
     "BuildingName": "Ford Motor Company Engineering Design Center",
-    "Location": ["42.0495", "-87.6774"],
+    "Location": ["42.0569", "-87.6765"], 
     "Rating": "31/50",
     "Breakdown": ["Aesthetics (exterior): 7",
     "Aesthetics (interior): 7",
