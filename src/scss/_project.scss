@@ -4,10 +4,11 @@
   }
   #map_box{
   display: none;
-  } 
+  }
 
   #hover_box{
     display: none;
+    z-index: 10000;
   }
   .building_name{
     padding-left: 5%;
@@ -88,21 +89,20 @@ ul{
   #map_box{
     width: 60%;
     height: 99vh;
-  } 
+  }
 
-  #mapid { 
-  height: 99vh; 
+  #mapid {
+  height: 99vh;
   width: 100%;
   }
 
 #hover_box{
-
+    z-index: 1000;
     width:20%;
     padding:1%;
     border-radius: .5vw 0vw .5vw .5vw;
     background-color: #b183e2;
     opacity: .9;
-    z-index: 300000;
     margin-left: 80%;
     position: absolute;
 

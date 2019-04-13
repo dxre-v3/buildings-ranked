@@ -34,7 +34,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(NBNmap);
 // set custom icon image
 var nbnicon = L.icon({
-  iconUrl: '/images/purpleline.png',
+  iconUrl: './images/purpleline.png',
   //shadowUrl: '/images/shadow.png',
 
   iconSize: [20, 20], // size of the icon
