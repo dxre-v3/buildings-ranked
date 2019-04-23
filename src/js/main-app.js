@@ -70,9 +70,6 @@ request.onload = function() {
   showData(bData);
 }
 
-function check() {
-  console.log("does the forloop work")
-}
 
 var geoArr = [];
 
@@ -82,54 +79,10 @@ function showData(jsonObj) {
 
   // run a for loop for the number of entries
 
+
   for (var i = 0; i < numberB.length; i++) {
 
-    // Create the elements you want to fill
-    var toAppend = document.createElement('span');
-    var head4 = document.createElement('h4');
-    var rankList = document.createElement('ul');
-    var sumList = document.createElement('span');
-
-    // add classes to necessary elements
-    toAppend.id = Number(numberB[i].Rank);
-    toAppend.addEventListener('click', clickedBuildingName)
-    head4.classList.add("building_name");
-    head4.id = "h4" + numberB[i].Rank;
-
-
-    rankList.classList.add("building_list");
-    rankList.id = "ul" + numberB[i].Rank;
-    sumList.classList.add("summary");
-    sumList.id = "sum" + numberB[i].Rank;
-    // get data and add to the newly created elements
-    head4.textContent = numberB[i].Rank + ": " + numberB[i].BuildingName;
-
-    var wordsRank = numberB[i].Breakdown;
-    //console.log(numberB[i]);
-    //console.log(wordsRank.length)
-
-    for (var j = 0; j < wordsRank.length; j++) {
-      //console.log(wordsRank[j] + " content");
-      var listItem = document.createElement('li');
-      listItem.textContent = wordsRank[j];
-      //console.log(listItem)
-      rankList.appendChild(listItem);
-    }
-    //
-
-    var sumRank = numberB[i].Summary;
-            console.log(sumRank)
-    for (var k = 0; k < sumRank.length; k++) {
-        var sumItem = document.createElement('p');
-        sumItem.textContent = sumRank[k];
-        console.log(k)
-        console.log(sumItem)
-        sumList.appendChild(sumItem);
-                console.log(sumList)
-    }
-
     if (numberB[i].Location !== undefined) {
-
       var geoLoc = numberB[i].Location;
       console.log(geoLoc)
     };
@@ -137,21 +90,24 @@ function showData(jsonObj) {
       icon: nbnicon
     }).addTo(NBNmap)
     geoMarker._icon.classList.add("geoTru");
-    //console.log(numberB[i].Rank);
     geoMarker._icon.id = numberB[i].Rank;
     geoMarker.addEventListener("mouseover", hovered);
     geoMarker.addEventListener("click", clicked);
     geoMarker.addEventListener("mouseout", left);
     console.log(typeof(geoMarker));
 
-    // add all elements to one holder element
-    toAppend.appendChild(head4);
-    toAppend.appendChild(rankList);
-    toAppend.appendChild(sumList);
-    infoHolder.appendChild(toAppend);
     geoArr.push(geoMarker);
   }
 }
+var building_name = document.getElementsByClassName("building_name");
+var building_list = document.getElementsByClassName("building_list");
+var summary = document.getElementsByClassName("summary");
+var outer_building = document.getElementsByClassName("outer_building")
+
+for (var b = 0; b <outer_building.length; b++) {
+  outer_building[b].addEventListener('click', clickedBuildingName)
+}
+
 
 var id;
 var head;
@@ -176,18 +132,18 @@ function hovered(e) {
   hover_box.style.marginLeft = "70%";
 }
 
-// whenever a geomarker is clicked on the map, get all
-// building description lists and close each one of them
-// before opening the list corresponding to the clicked
-// geomarker
+/*whenever a geomarker is clicked on the map, get all
+building description lists and close each one of them
+before opening the list corresponding to the clicked
+geomarker*/
 function close() {
-  const allBuildingLists = document.getElementsByClassName('building_list');
-  const allSummaries = document.getElementsByClassName('summary');
-  for (let i = 0; i < allBuildingLists.length; i++) {
-    allBuildingLists[i].style.display = "none";
-    allSummaries[i].style.display = "none";
+  pair()
+  colorHolder = null;
+  for (let i = 0; i < summary.length; i++) {
+    summary[i].style.display = "none";
+    building_list[i].style.display = "none";
+    building_name[i].style.color = colorHolder;
   }
-
 }
 
 function clicked(e) {
@@ -200,36 +156,40 @@ function clicked(e) {
   list.style.display = "block";
   sum.style.display = "block";
   head.style.color = "#501f84";
-  
+  open = true; 
+  tester =  id;
 }
 
 
 
 var colorHolder;
 var open;
+var tester;
 
 function clickedBuildingName(e) {
+  console.log(tester)
   close();
   var spot = event.target;
   id = spot.id.slice(2);
   id = Number(id);
   var head2 = document.getElementById("h4" + id);
-  if (open === true){
-  close();
-  colorHolder = null;
-  head2.style.color = colorHolder;
-  open = false; 
+  if (open === true && tester == id){
+    open = false; 
+    tester = "m";
+    console.log(tester)
   //head2.style.color = "#b183e2";
- }else{
-  var list2 = document.getElementById("ul" + id);
-  var sum2 = document.getElementById("sum" + id);
-  console.log('ev target', e)
-  list2.style.display = "block";
-  sum2.style.display = "block";
-  colorHolder = "#501f84";
-  head2.style.color = colorHolder;
-  open = true; 
-}
+  }else{
+    var list2 = document.getElementById("ul" + id);
+    var sum2 = document.getElementById("sum" + id);
+    // console.log('ev target', e)
+    list2.style.display = "block";
+    sum2.style.display = "block";
+    colorHolder = "#501f84";
+    head2.style.color = colorHolder;
+    open = true; 
+    tester =  id;
+    console.log(tester)
+  }
 
 }
 
@@ -243,10 +203,5 @@ function left(e) {
 
 }
 
-function hey() {
-  console.log('hey, working')
-}
 
-var building_name = document.getElementsByClassName("building_name");
-var building_list = document.getElementsByClassName("building_list");
-var summary = document.getElementsByClassName("summary");
+

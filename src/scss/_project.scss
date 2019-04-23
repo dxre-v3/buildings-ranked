@@ -13,12 +13,16 @@
     padding-left: 5%;
   }
   .building_list{
-    display: block;
+    display: none;
     /*border: solid red 2px;*/
     padding-left: 20%;
   }
   .summary{
-    display: block;
+    display: none;
+  }
+    .summary > p{
+    padding-left: 10%;
+    padding-right: 10%;
   }
 }
 
@@ -40,6 +44,10 @@
   }
    .building_list{
     display: none;
+  }
+    .summary > p{
+
+    padding-right: 10%;
   }
 
 }
@@ -85,6 +93,7 @@ ul{
       color:#3e1867;
       font-family: $proxima;
       }
+
   #map_box{
     width: 60%;
     height: 99vh;
@@ -109,7 +118,6 @@ ul{
  }
 
 
-
   #hover_name{
     color: $nbn-purple;
     font-family: $proxima;
@@ -130,6 +138,3 @@ ul{
 
 
 
-/*.marker:hover{
- border: solid red 1px; 
-}*/
