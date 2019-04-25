@@ -34,7 +34,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(NBNmap);
 // set custom icon image
 var nbnicon = L.icon({
-  iconUrl: '/images/purpleline.png',
+  iconUrl: 'images/purpleline.png',
   //shadowUrl: '/images/shadow.png',
 
   iconSize: [20, 20], // size of the icon
@@ -78,13 +78,10 @@ function showData(jsonObj) {
   var numberB = jsonObj['Sheet1'];
 
   // run a for loop for the number of entries
-
-
   for (var i = 0; i < numberB.length; i++) {
 
     if (numberB[i].Location !== undefined) {
       var geoLoc = numberB[i].Location;
-      console.log(geoLoc)
     };
     var geoMarker = L.marker(geoLoc, {
       icon: nbnicon
@@ -94,7 +91,6 @@ function showData(jsonObj) {
     geoMarker.addEventListener("mouseover", hovered);
     geoMarker.addEventListener("click", clicked);
     geoMarker.addEventListener("mouseout", left);
-    console.log(typeof(geoMarker));
 
     geoArr.push(geoMarker);
   }
@@ -104,7 +100,7 @@ var building_list = document.getElementsByClassName("building_list");
 var summary = document.getElementsByClassName("summary");
 var outer_building = document.getElementsByClassName("outer_building")
 
-for (var b = 0; b <building_name.length; b++) {
+for (var b = 0; b < building_name.length; b++) {
   building_name[b].addEventListener('click', clickedBuildingName)
 }
 
@@ -156,8 +152,8 @@ function clicked(e) {
   list.style.display = "block";
   sum.style.display = "block";
   head.style.color = "#501f84";
-  open = true; 
-  tester =  id;
+  open = true;
+  tester = id;
 }
 
 
@@ -167,32 +163,25 @@ var open;
 var tester;
 
 function clickedBuildingName(e) {
-  console.log(tester)
   close();
   var spot = event.target;
   id = spot.id.slice(2);
   id = Number(id);
   var head2 = document.getElementById("h4" + id);
-  if (open === true && tester == id){
-    open = false; 
+  if (open === true && tester == id) {
+    open = false;
     tester = "m";
-    console.log(tester)
-  //head2.style.color = "#b183e2";
-  }else{
+  } else {
     var list2 = document.getElementById("ul" + id);
     var sum2 = document.getElementById("sum" + id);
-    // console.log('ev target', e)
     list2.style.display = "block";
     sum2.style.display = "block";
     colorHolder = "#501f84";
     head2.style.color = colorHolder;
-    open = true; 
-    tester =  id;
-    console.log(tester)
+    open = true;
+    tester = id;
   }
-
 }
-
 
 function left(e) {
   hover_name.innerHTML = "Hover over a building to see it's ranking. Click to learn more.";
@@ -202,6 +191,3 @@ function left(e) {
   hover_box.style.marginLeft = "80%";
 
 }
-
-
-
