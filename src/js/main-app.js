@@ -104,8 +104,8 @@ var building_list = document.getElementsByClassName("building_list");
 var summary = document.getElementsByClassName("summary");
 var outer_building = document.getElementsByClassName("outer_building")
 
-for (var b = 0; b <outer_building.length; b++) {
-  outer_building[b].addEventListener('click', clickedBuildingName)
+for (var b = 0; b <building_name.length; b++) {
+  building_name[b].addEventListener('click', clickedBuildingName)
 }
 
 
